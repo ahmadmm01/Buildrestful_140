@@ -4,7 +4,10 @@
  */
 package exception;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 
 /**
  *
@@ -13,5 +16,9 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 @ControllerAdvice
 public class ProductExceptionController
 {
-    
+    @ExceptionHandler(value = ProductAlreadyExist.class)
+    public ResponseEntity<Object> exception(ProductAlreadyExist exception)
+    {
+        return new ResponseEntity<>("Product already exists", HttpStatus.CONFLICT);
+    }
 }
