@@ -4,6 +4,7 @@
  */
 package pws.a.learningRESTful;
 
+import exception.ProductAlreadyExist;
 import model.Product;
 import java.util.HashMap;
 import java.util.Map;
@@ -47,6 +48,7 @@ public class ProductServiceController
     @RequestMapping(value = "/products", method = RequestMethod.POST)
     public ResponseEntity<Object> createProduct(@RequestBody Product product)
     {
+        if(productRepo.containsKey(product.getId()))throw new ProductAlreadyExist();
         productRepo.put(product.getId(), product);
         return new ResponseEntity<>("Product is created successfully", HttpStatus.CREATED);
     }
