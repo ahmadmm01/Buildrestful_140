@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 //<--define import
 /**
@@ -59,8 +58,11 @@ public class ProductServiceController
     //define class for createProduct
     public ResponseEntity<Object> createProduct(@RequestBody Product product)
     {
-        //define conditional command, if data already exist (by 'id') can't create data then return method with message and HttpStatus
-        if(productRepo.containsKey(product.getId()))return new ResponseEntity<>("Product is already exist", HttpStatus.CONFLICT);
+        //define conditional command, if data already exist (by 'id') can't create data
+        if(productRepo.containsKey(product.getId()))
+            //return method with message and HttpStatus
+            return new ResponseEntity<>("Product is already exist", HttpStatus.CONFLICT);
+        
         //define data value
         productRepo.put(product.getId(), product);
         //return method with message and HttpStatus
@@ -72,8 +74,11 @@ public class ProductServiceController
     //define class for updateProduct
     public ResponseEntity<Object> updateProduct(@PathVariable("id") String id, @RequestBody Product product)
     {
-        //define conditional command, if data not found (by 'id') can't update data then return method with message and HttpStatus
-        if(!productRepo.containsKey(id))return new ResponseEntity<>("Product not found", HttpStatus.NOT_FOUND);
+        //define conditional command, if data not found (by 'id') can't update data
+        if(!productRepo.containsKey(id))
+            //return method with message and HttpStatus
+            return new ResponseEntity<>("Product not found", HttpStatus.NOT_FOUND);
+        
         //remove data by 'id'
         productRepo.remove(id);
         //define data value
