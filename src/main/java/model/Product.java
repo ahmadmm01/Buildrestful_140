@@ -15,6 +15,9 @@ public class Product
     //define variables
     private String id;
     private String name;
+    private Double price;
+    private Double discount;
+    private Double total;
 
     //define method
     public String getId()
@@ -42,5 +45,47 @@ public class Product
     {
         //define value
         this.name = name;
+    }
+
+    //define method
+    public Double getPrice()
+    {
+        //define return method
+        return price;
+    }
+
+    //define method
+    public void setPrice(Double price)
+    {
+        //define value
+        this.price = price;
+    }
+
+    //define method
+    public Double getDiscount()
+    {
+        //define return method
+        return discount;
+    }
+
+    //define method
+    public void setDiscount(Double discount)
+    {
+        //define value
+        this.discount = discount;
+    }
+
+    //define method
+    public Double getTotal()
+    {
+        //define return method
+        return total;
+    }
+
+    //define method
+    public void setTotal(Double total)
+    {
+        //define value
+        this.total = total;
     }
 }

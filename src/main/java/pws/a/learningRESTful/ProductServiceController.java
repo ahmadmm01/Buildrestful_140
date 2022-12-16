@@ -28,19 +28,27 @@ import org.springframework.web.bind.annotation.RestController;
 public class ProductServiceController
 {
     //define static method for creating first data
-    private static Map<String, Product> productRepo = new HashMap<>();
+    private static final Map<String, Product> productRepo = new HashMap<>();
     static 
     {
         //define data1
         Product honey = new Product();
         honey.setId("1");
         honey.setName("Honey");
+        honey.setPrice(10000.0);
+        honey.setDiscount(0.1);
+        Double totallhoney = honey.getPrice() - (honey.getPrice() * honey.getDiscount());
+        honey.setTotal(totallhoney);
         productRepo.put(honey.getId(), honey);
         
         //define data2
         Product almond = new Product();
         almond.setId("2");
         almond.setName("Almond");
+        almond.setPrice(20000.0);
+        almond.setDiscount(0.2);
+        Double totallalmond = almond.getPrice() - (almond.getPrice() * almond.getDiscount());
+        almond.setTotal(totallalmond);
         productRepo.put(almond.getId(), almond);
     }
     
@@ -64,6 +72,8 @@ public class ProductServiceController
             return new ResponseEntity<>("Product is already exist", HttpStatus.CONFLICT);
         
         //define data value
+        Double totall = product.getPrice() - (product.getPrice() * product.getDiscount());
+        product.setTotal(totall);
         productRepo.put(product.getId(), product);
         //return method with message and HttpStatus
         return new ResponseEntity<>("Product is created successfully", HttpStatus.CREATED);
@@ -83,6 +93,8 @@ public class ProductServiceController
         productRepo.remove(id);
         //define data value
         product.setId(id);
+        Double totall = product.getPrice() - (product.getPrice() * product.getDiscount());
+        product.setTotal(totall);
         productRepo.put(id, product);
         //return method with message and HttpStatus
         return new ResponseEntity<>("Product is updated successfully", HttpStatus.OK);
